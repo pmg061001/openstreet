@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7f2">
+    <meta name="description" content="출발지와 도착지를 검색하고 자동차 이동 거리를 확인하세요.">
+    <title>거리찾기 — 출발지에서 도착지까지</title>
+    <link rel="preconnect" href="https://nominatim.openstreetmap.org">
+    <link rel="preconnect" href="https://router.project-osrm.org">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="거리찾기 홈">
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          <span>거리찾기</span>
+        </a>
+        <span class="topbar-note">OPENSTREETMAP 기반</span>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> 간편한 거리 계산</p>
+        <h1 id="page-title">어디서 어디까지<br>가시나요?</h1>
+        <p class="intro">장소를 검색해 선택하면 자동차 도로 기준 거리를 알려드려요.</p>
+      </section>
+
+      <section class="calculator" aria-label="출발지와 도착지 거리 계산">
+        <form id="route-form" novalidate>
+          <div class="location-fields">
+            <div class="route-rail" aria-hidden="true">
+              <span class="rail-point rail-start"></span>
+              <span class="rail-line"></span>
+              <span class="rail-point rail-end"></span>
+            </div>
+            <div class="field-stack">
+              <div class="field">
+                <label for="origin">출발지</label>
+                <div class="input-wrap">
+                  <input id="origin" name="origin" type="search" placeholder="예: 서울역" autocomplete="off" aria-autocomplete="list" aria-controls="origin-results" aria-expanded="false">
+                  <span class="field-status" id="origin-status" aria-live="polite"></span>
+                </div>
+                <ul class="suggestions" id="origin-results" role="listbox" aria-label="출발지 검색 결과" hidden></ul>
+              </div>
+              <div class="field">
+                <label for="destination">도착지</label>
+                <div class="input-wrap">
+                  <input id="destination" name="destination" type="search" placeholder="예: 부산역" autocomplete="off" aria-autocomplete="list" aria-controls="destination-results" aria-expanded="false">
+                  <span class="field-status" id="destination-status" aria-live="polite"></span>
+                </div>
+                <ul class="suggestions" id="destination-results" role="listbox" aria-label="도착지 검색 결과" hidden></ul>
+              </div>
+            </div>
+          </div>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          <button class="calculate-button" id="calculate-button" type="submit">
+            <span>거리 계산하기</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <section class="result" id="result" aria-live="polite" hidden>
+          <div class="result-heading">
+            <span class="result-icon" aria-hidden="true">↗</span>
+            <span>자동차 이동 거리</span>
+          </div>
+          <p class="distance" id="distance"></p>
+          <p class="result-caption">선택한 경로의 도로 거리예요.</p>
+          <a class="map-link" id="map-link" target="_blank" rel="noopener noreferrer">
+            <span>지도에서 보기</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </section>
+      </section>
+
+      <p class="service-note">경로는 OSRM 공개 서버의 자동차 경로를 기준으로 계산됩니다. 실제 이동 거리와 다를 수 있어요.</p>
+
+      <footer class="footer">
+        <span>장소 검색 및 지도 데이터</span>
+        <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>
+      </footer>
+    </main>
+  </body>
+</html>
